@@ -1,0 +1,53 @@
+:root {
+    --black: #000;
+    --off-black: #1a1a1a;
+    --grey: #999;
+    --light: #eee;
+    --canvas-color-dark: var(--black);
+    --canvas-color-mid: var(--grey);
+    --canvas-color-light: var(--light);
+    --highlight: rebeccapurple;
+    --highlight-light: #c2add6;
+}
+
+html {
+    background: linear-gradient(to right, var(--off-black), var(--black), var(--off-black));
+}
+
+body {
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+canvas {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    background-color: var(--off-black);
+}
+
+header {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+h1, h2 {
+    margin: 0;
+    font-family: 'Rubik Dirt', cursive;
+    font-weight: 400;
+    text-align: center;
+    color: var(--light);
+    cursor: default;
+    text-shadow: -1px -1px 2px var(--highlight),
+                 -1px  1px 2px var(--highlight),
+                  1px -1px 2px var(--highlight),
+                  1px  1px 2px var(--highlight);
+}
+
+h1 {
+    font-size: min(100px, 20vw);
+}
+h2 {
+    font-size: min(40px, 18vw);
+}
