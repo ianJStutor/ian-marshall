@@ -18,6 +18,7 @@ body {
     margin: 0 auto;
     max-width: 1000px;
     font-family: sans-serif;
+    padding-bottom: 150px;
 }
 
 canvas {
@@ -37,6 +38,7 @@ section {
     text-align: center;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 figure {
@@ -105,5 +107,5 @@ h2 {
 }
 h3 {
     font-size: min(80px, 19vw);
-    margin: 25px;
+    margin: 150px 0 25px;
 }
