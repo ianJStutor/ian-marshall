@@ -47,7 +47,8 @@ export default class Spline {
             vx: 0,
             vy: 0,
             color: "black",
-            radius: 10,
+            radius: 1,
+            lineWidth: 1,
             timestep: 0.001,
             intensity: 30,
             divisor: 500,
@@ -66,6 +67,7 @@ export default class Spline {
         this.x = this.originalX = this.settings.x ?? this.ctx?.canvas.width * 0.5;
         this.y = this.originalY = this.settings.y ?? this.ctx?.canvas.height * 0.5;
         this.radius = this.settings.radius;
+        this.lineWidth = this.settings.lineWidth;
 
         //movement
         this.vx = this.originalVx = this.settings.vx;
@@ -99,10 +101,12 @@ export default class Spline {
         const ctx = this.ctx;
         const x = this.x + this.simplex.noise3D(this.x/divisor, this.y/divisor, this.time) * intensity * dt;
         const y = this.y + this.simplex.noise3D(this.y/divisor, this.x/divisor, this.time) * intensity * dt;
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(x, y, this.radius, 0, Math.PI*2);
-        ctx.fill();
+        if (this.radius) {
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(x, y, this.radius, 0, Math.PI*2);
+            ctx.fill();
+        }
     }
 
     #move(dt) {
