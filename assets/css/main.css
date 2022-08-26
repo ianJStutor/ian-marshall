@@ -17,10 +17,11 @@ html {
 body {
     margin: 0 auto;
     max-width: 1000px;
+    font-family: sans-serif;
 }
 
 canvas {
-    position: fixed;
+    position: absolute;
     z-index: -1;
     top: 0;
     background-color: var(--off-black);
@@ -32,7 +33,58 @@ header {
     place-items: center;
 }
 
-h1, h2 {
+section {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+figure {
+    background: #eee;
+    width: 200px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+figure img {
+    width: 100%;
+    display: block;
+}
+
+figure > img:nth-of-type(2) {
+    display: none;
+}
+
+figure:hover > img:nth-of-type(1) {
+    display: none;
+}
+
+figure:hover > img:nth-of-type(2) {
+    display: block;
+}
+
+figcaption {
+
+}
+
+figcaption h4 {
+
+}
+
+figcaption p {
+
+}
+
+figcaption nav {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+figcaption a {
+    width: 30%;
+}
+
+h1, h2, h3 {
     margin: 0;
     font-family: 'Rubik Dirt', cursive;
     font-weight: 400;
@@ -50,4 +102,8 @@ h1 {
 }
 h2 {
     font-size: min(40px, 18vw);
+}
+h3 {
+    font-size: min(80px, 19vw);
+    margin: 25px;
 }
