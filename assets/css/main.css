@@ -109,3 +109,8 @@ h3 {
     font-size: min(80px, 19vw);
     margin: 150px 0 25px;
 }
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
