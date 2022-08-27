@@ -16,7 +16,7 @@ const simplex = new SimplexNoise(); //from <script> tag in HTML
 const engine = new ParticleEngine(ctx, {pointEvents: true, useParentForPointEvents: true});
 
 //particles
-const points = Spline.getPointsArray(canvas.width, canvas.height, {inset: 0});
+const points = Spline.getPointsArray(canvas.width, canvas.height, {radius: 15, divisor: 200});
 for (let {x, y} of points) {
     engine.addParticle(new Spline(ctx, simplex, {x, y, color: fgcolor}));
 }

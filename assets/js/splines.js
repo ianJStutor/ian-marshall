@@ -11,22 +11,23 @@ export default class Spline {
         canvas.classList.remove(Spline.className);
     }
 
-    static getPointsArray(width, height, {radius = 10, margin = 5, inset = 0} = {}) {
+    static getPointsArray(width, height, {radius = 10, margin = 5, inset = 0, decay = 0.9} = {}) {
         const w = width - margin * 2;
         const h = height - margin * 2;
         const colWidth = radius * 2 + margin;
-        const rowHeight = radius * 2 + margin;
+        var rowHeight = radius * 2 + margin;
         const cols = Math.floor(w / colWidth);
         const rows = Math.floor(h / rowHeight);
         const startX = (width * 0.5) - (cols * colWidth * 0.5) + (colWidth * 0.5);
         const startY = (height * 0.5) - (rows * rowHeight * 0.5) + (rowHeight * 0.5);
         const points = [];
-        for (let colIndex = 0; colIndex < cols; colIndex++) {
-            const x = colIndex * colWidth + startX;
-            for (let rowIndex = 0; rowIndex < rows; rowIndex++) {
-                const y = rowIndex * rowHeight + startY;
+        for (let rowIndex = rows - 1; rowIndex >= 0; rowIndex--) {
+            const y = rowIndex * rowHeight + startY;
+            for (let colIndex = 0; colIndex < cols; colIndex++) {
+                const x = colIndex * colWidth + startX;
                 points.push({x, y});
             }
+            rowHeight *= decay;
         }
         return points;
     }
@@ -47,7 +48,7 @@ export default class Spline {
             vx: 0,
             vy: 0,
             color: "black",
-            radius: 1,
+            radius: 0,
             lineWidth: 1,
             timestep: 0.001,
             intensity: 30,
@@ -64,8 +65,8 @@ export default class Spline {
         this.time = this.settings.startTime;
 
         //position & radius
-        this.x = this.originalX = this.settings.x ?? this.ctx?.canvas.width * 0.5;
-        this.y = this.originalY = this.settings.y ?? this.ctx?.canvas.height * 0.5;
+        this.x = this.originalX = this.noiseX = this.settings.x ?? this.ctx?.canvas.width * 0.5;
+        this.y = this.originalY = this.noiseY = this.settings.y ?? this.ctx?.canvas.height * 0.5;
         this.radius = this.settings.radius;
         this.lineWidth = this.settings.lineWidth;
 
@@ -87,25 +88,37 @@ export default class Spline {
         this.ctx = ctx;
     }
 
-    update(dt) {
+    update(dt, particles) {
         //must have a context
         if (!this.ctx) return false;
-        this.#draw(dt);
+        this.#draw(dt, particles);
         this.#move(dt);
         this.time += this.settings.timestep;
         return true;
     }
 
-    #draw(dt) {
+    #draw(dt, particles) {
         const {divisor, intensity} = this.settings;
         const ctx = this.ctx;
-        const x = this.x + this.simplex.noise3D(this.x/divisor, this.y/divisor, this.time) * intensity * dt;
-        const y = this.y + this.simplex.noise3D(this.y/divisor, this.x/divisor, this.time) * intensity * dt;
+        const x = this.noiseX = this.x + this.simplex.noise3D(this.x/divisor, this.y/divisor, this.time) * intensity * dt;
+        const y = this.noiseY = this.y + this.simplex.noise3D(this.y/divisor, this.x/divisor, this.time) * intensity * dt;
         if (this.radius) {
             ctx.fillStyle = this.color;
             ctx.beginPath();
             ctx.arc(x, y, this.radius, 0, Math.PI*2);
             ctx.fill();
+        }
+        if (this.lineWidth) {
+            const index = particles.findIndex(p => p === this);
+            const p = particles[index+1];
+            if (p && p.x > this.x) {
+                ctx.lineWidth = this.lineWidth;
+                ctx.strokeStyle = this.color;
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(p.noiseX, p.noiseY);
+                ctx.stroke();
+            }
         }
     }
 
