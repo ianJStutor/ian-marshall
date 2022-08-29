@@ -6,9 +6,13 @@ const fgcolor = "rgba(255, 255, 255, 0.75)";
 
 //canvas
 const canvas = document.querySelector("canvas");
-canvas.width = document.body.offsetWidth;
-canvas.height = window.innerHeight;
 const ctx = canvas.getContext("2d");
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+function resizeCanvas() {
+    canvas.width = document.body.offsetWidth;
+    canvas.height = window.innerHeight;
+}
 
 //setup
 Spline.setupCanvas?.(canvas);
