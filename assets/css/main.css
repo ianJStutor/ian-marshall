@@ -81,7 +81,7 @@ figcaption h4 {
 }
 
 figcaption p {
-
+    min-height: 72px;
 }
 
 figcaption nav {
