@@ -34,6 +34,51 @@ header {
     place-items: center;
 }
 
+main > nav {
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    background-color: var(--off-black);
+}
+
+main > nav img {
+    width: 25px;
+}
+
+main > nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    padding: 0;
+}
+
+main > nav li {
+    flex-grow: 1;
+    margin: 0 5px;
+
+}
+
+main > nav li a {
+    color: var(--light);
+    text-decoration: none;
+    background-color: var(--off-black);
+    display: grid;
+    place-items: center;
+    height: 25px;
+    padding: 5px 0;
+    border-radius: 5px;
+    transition: 0.25s;
+}
+
+main > nav li :is(a:hover, a:focus) {
+    background-color: var(--highlight);
+}
+
+article {
+    padding-top: 50px;
+}
+
 section {
     text-align: center;
     display: flex;
