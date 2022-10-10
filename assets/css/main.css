@@ -104,15 +104,15 @@ figure img {
     display: block;
 }
 
-article:not(#resume) figure > a > img:nth-of-type(2) {
+article:not(#resume) figure >  img:nth-of-type(2) {
     display: none;
 }
 
-article:not(#resume) figure:hover > a > img:nth-of-type(1) {
+article:not(#resume) figure:hover >  img:nth-of-type(1) {
     display: none;
 }
 
-article:not(#resume) figure:hover > a > img:nth-of-type(2) {
+article:not(#resume) figure:hover > img:nth-of-type(2) {
     display: block;
     box-shadow: 0 0 5px black;
 }
