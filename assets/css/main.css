@@ -158,13 +158,13 @@ h1, h2, h3 {
 }
 
 h1 {
-    font-size: min(100px, 20vw);
+    font-size: clamp(100px, 100%, 20vw);
 }
 h2 {
-    font-size: min(40px, 18vw);
+    font-size: clamp(40px, 100%, 18vw);
 }
 h3 {
-    font-size: min(80px, 19vw);
+    font-size: clamp(80px, 100%, 19vw);
     margin: 150px 0 25px;
 }
 
