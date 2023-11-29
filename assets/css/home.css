@@ -1,0 +1,126 @@
+header {
+    color: white;
+    display: grid;
+    place-content: center;
+    position: relative;
+
+    & canvas {
+        background: var(--off-black);
+        position: absolute;
+        z-index: -1;
+    }
+    & hgroup {
+        margin: 40px auto 100px;
+        cursor: default;
+    }
+    & h1 {
+        margin-bottom: 0.1em;
+    }
+    & ul {
+        font-size: min(1.25em, 4.5vw);
+        line-height: 1.5em;
+        color: var(--light);
+    }
+    & ul li::marker {
+        content: "◦ ";
+    }
+    & menu {
+        list-style-type: none;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+    & button {
+        background: none;
+        color: var(--grey);
+        font-size: 0.7em;
+        cursor: pointer;
+        border: none;
+    
+        &:hover {
+            color: var(--highlight-light);
+        }
+    }
+}
+
+main > section h2 + * {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+
+    & > * {
+        margin-bottom: 1em;
+    }
+}
+
+figure:has(img) {
+    display: inline-block;
+    margin: 0;
+    padding-bottom: 5px;
+    background-color: var(--highlight-light);
+    text-align: center;
+    border-radius: 0 0 8px 8px;
+    border-top: 1px solid var(--highlight-light);
+    box-sizing: border-box;
+    width: 300px;
+    height: 100%;
+
+    & img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border-bottom: 3px double black;
+        margin-bottom: 8px;
+        transition: 0.25s;
+    }
+    & figcaption {
+        box-sizing: border-box;
+        padding: 0.5em;
+    }
+}
+@media screen and (prefers-reduced-motion: no-preference) {
+    a:hover figure img {
+        transform: scale(0.95);
+    }
+}
+
+#feedback {
+    width: 70%;
+    margin: 30px auto 0;
+    padding: 0.5em;
+    box-sizing: border-box;
+
+    & > h2 + * {
+        background: linear-gradient(var(--shadow), var(--off-black), transparent);
+    }
+    & figure:first-of-type {
+        width: 200px;
+    }
+    & figure#quote {
+        width: max(250px, calc(85% - 200px));
+        font-size: min(1.3em, 4vw);
+        line-height: 1.5em;
+        margin: 0 0.5em;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1em;
+        
+        &.use-slider {
+            height: 14em;
+        }
+    }
+    
+    & address {
+        font-size: 0.8em;
+    }
+}
+
+#resume figure img {
+    height: 200px;
+}

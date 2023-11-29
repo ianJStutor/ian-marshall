@@ -1,0 +1,23 @@
+figure {
+    margin: 2em auto 0;
+    max-width: 60ch;
+    padding: 1em;
+    background: linear-gradient(var(--off-black), var(--black));
+
+    & q {
+        font-size: min(1.5em, 4vw);
+        font-weight: bold;
+    }
+    & address {
+        color: var(--grey);
+        margin-bottom: 1em;
+    }
+    & blockquote {
+        color: #ddd;
+
+        & em {
+            color: var(--highlight-med);
+            font-weight: bold;
+        }
+    }
+}
