@@ -19,7 +19,7 @@ if (!prefersReducedMotion()) {
 
     //canvas
     //CRITICAL: canvas cannot alter the size of its parent
-    //  element (header), or the ResizeObserver will 
+    //  element (<header>), or the ResizeObserver will 
     //  trigger an infinite loop! In this case, the
     //  canvas element has CSS "position: absolute"
     //  and is sized only to the header's offsetWidth

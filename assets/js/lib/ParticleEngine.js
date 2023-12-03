@@ -23,9 +23,10 @@ export default class ParticleEngine {
         this.setSize();
         if (this.settings.pointEvents) {
             const el = this.settings.useParentForPointEvents ? this.ctx.canvas.parentElement : this.ctx.canvas;
-            el.addEventListener("mousemove", (e) => this.handlePointEvents(e));
-            el.addEventListener("touchmove", (e) => this.handlePointEvents(e));
-            el.addEventListener("pointermove", (e) => this.handlePointEvents(e));
+            const passive = { passive: true };
+            el.addEventListener("mousemove", (e) => this.handlePointEvents(e), passive);
+            el.addEventListener("touchmove", (e) => this.handlePointEvents(e), passive);
+            el.addEventListener("pointermove", (e) => this.handlePointEvents(e), passive);
         }
     }
 

@@ -16,6 +16,12 @@ html {
     background: linear-gradient(to right, var(--off-black), var(--black), var(--off-black));
 }
 
+@media screen and (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
 body {
     margin: 0 auto;
     max-width: 1000px;
@@ -23,6 +29,7 @@ body {
     padding-bottom: 150px;
     line-height: 1.5em;
     color: white;
+    
 }
 
 header {
@@ -59,6 +66,11 @@ h3 {
     line-height: 1.05em;
     text-wrap: balance;
 }
+p, q {
+    max-width: min(60ch, 90%);
+    display: table;
+    margin: 0 auto 1em;
+}
 
 a {
     color: black;
@@ -68,7 +80,6 @@ a {
     &:hover {
         color: var(--highlight);
     }
-
     &:hover h1 {
         filter: invert(1);
     }

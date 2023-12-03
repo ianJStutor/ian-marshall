@@ -12,17 +12,23 @@ header {
     & hgroup {
         margin: 40px auto 100px;
         cursor: default;
+        text-align: center;
     }
     & h1 {
-        margin-bottom: 0.1em;
+        display: table;
+        margin: 0 auto 0.1em;
+        background: #00000099;
+        box-shadow: 0 0 10px black;
     }
-    & ul {
-        font-size: min(1.25em, 4.5vw);
-        line-height: 1.5em;
-        color: var(--light);
-    }
-    & ul li::marker {
-        content: "◦ ";
+    & p {
+        display: inline-block;
+        margin: 1em auto;
+        font-size: 2em;
+        line-height: 1em;
+        font-weight: bold;
+        background: #00000099;
+        box-shadow: 0 0 10px black;
+        max-width: none;
     }
     & menu {
         list-style-type: none;
@@ -46,11 +52,43 @@ header {
     }
 }
 
-main > section h2 + * {
+nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    justify-content: center;
+    position: sticky;
+    top: -5px;
+    z-index: 100;
+    isolation: isolate;
+    
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(var(--highlight-light) 90%, var(--highlight));
+        transform: perspective( 1000px ) rotateX( 30deg );
+        border-bottom: 2px solid black;
+        box-shadow: 0 2px 5px black;
+        z-index: -1;
+    }
+
+    & a {
+        padding: 0.5em;
+
+        &:hover img {
+            filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(-145deg) brightness(65%) contrast(80%);
+        }
+    }
+}
+
+main > section > :is(a, div) {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: stretch;
+    margin-top: 2em;
 
     & > * {
         margin-bottom: 1em;
@@ -88,6 +126,45 @@ figure:has(img) {
     }
 }
 
+#about {
+    width: 70%;
+    margin: 30px auto 0;
+
+    & > div {
+        align-items: flex-start;
+    }
+    & img {
+        object-fit: contain;
+    }
+    & div div {
+        max-width: calc(100% - 220px);
+    }
+    & h2 {
+        margin-top: 0;
+    }
+    & ul {
+        font-size: min(1.25em, 4.5vw);
+        line-height: 1.5em;
+        color: var(--light);
+    }
+    & ul li::marker {
+        content: "◦ ";
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #about > div {
+        display: block;
+        text-align: center;
+
+        & div {
+            text-align: left;
+            max-width: 90%;
+            margin: auto;
+        }
+    }
+}
+
 #feedback {
     width: 70%;
     margin: 30px auto 0;
@@ -97,7 +174,8 @@ figure:has(img) {
     & > h2 + * {
         background: linear-gradient(var(--shadow), var(--off-black), transparent);
     }
-    & figure:first-of-type {
+    & figure:first-of-type,
+    & figure:first-of-type img {
         width: 200px;
     }
     & figure#quote {
