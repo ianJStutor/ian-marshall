@@ -41,13 +41,14 @@ nav {
     top: -5px;
     z-index: 100;
     isolation: isolate;
+    padding: 3px 0;
     
     &::before {
         content: "";
         display: block;
         position: absolute;
         inset: 0;
-        background: linear-gradient(var(--highlight-light) 90%, var(--highlight));
+        background: linear-gradient(var(--highlight-light) calc(100% - 10px), var(--highlight));
         transform: perspective( 1000px ) rotateX( 30deg );
         border-bottom: 2px solid black;
         box-shadow: 0 2px 5px black;
@@ -60,6 +61,37 @@ nav {
         &:hover img {
             filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(-145deg) brightness(65%) contrast(80%);
         }
+    }
+
+    & button {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 999px) {
+    nav {
+        flex-direction: column;
+        padding-top: 3em;
+        top: -3em;
+        position: fixed;
+        transform: translateY(calc(6em - 100%));
+        transition: transform 0.25s;
+        
+        & button {
+            display: block;
+            font-size: 2em;
+            transform: rotate(90deg);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px 15px;
+        }
+    }
+    nav::before {
+        transform: none;
+    }
+    nav:has(button:focus) {
+        transform: translateY(0);
     }
 }
 
@@ -98,13 +130,15 @@ main > section > :is(a, div) {
 }
 
 figure:has(img) {
-    display: inline-block;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
     margin: 0;
     padding-bottom: 5px;
     background-color: var(--highlight-light);
     text-align: center;
     border-radius: 0 0 8px 8px;
-    border-top: 1px solid var(--highlight-light);
+    border: 1px solid var(--highlight-light);
     box-sizing: border-box;
     width: 300px;
     height: 100%;
@@ -114,12 +148,17 @@ figure:has(img) {
         width: 100%;
         aspect-ratio: 1 / 1;
         border-bottom: 3px double black;
+        border-top: 3px double black;
         margin-bottom: 8px;
         transition: 0.25s;
     }
     & figcaption {
         box-sizing: border-box;
         padding: 0.5em;
+        margin: 0 0 0.5em;
+        font-size: 0.75em;
+        line-height: 1.05em;
+        text-wrap: balance;
     }
 }
 @media screen and (prefers-reduced-motion: no-preference) {
@@ -133,7 +172,7 @@ figure:has(img) {
     margin: 30px auto 0;
 
     & > div {
-        align-items: flex-start;
+        align-items: flex-end;
     }
     & img {
         object-fit: contain;
@@ -181,6 +220,9 @@ figure:has(img) {
     & :is(figure:first-of-type, figure:first-of-type img) {
         width: 200px;
     }
+    & figure {
+        flex-direction: column;
+    }
     & figure#quote {
         width: max(250px, calc(85% - 200px));
         font-size: min(1.3em, 4vw);
@@ -188,7 +230,7 @@ figure:has(img) {
         margin: 0 0.5em;
         color: white;
         display: flex;
-        flex-direction: column;
+        
         justify-content: center;
         gap: 1em;
         

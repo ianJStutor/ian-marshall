@@ -61,10 +61,14 @@ h2 {
     letter-spacing: 0.1em;
 }
 h3 {
-    margin: 0 0 0.5em;
-    font-size: 0.75em;
-    line-height: 1.05em;
-    text-wrap: balance;
+    font-size: 1.5em;
+    line-height: 1.25em;
+    margin: 0.25em;
+
+    & small {
+        display: block;
+        font-size: 0.6em;
+    }
 }
 p, q {
     max-width: min(60ch, 90%);
