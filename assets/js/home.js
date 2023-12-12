@@ -3,15 +3,16 @@ import Spline from "./lib/Spline.js";
 import feedback from "../data/feedback.js";
 
 function prefersReducedMotion() {
-    return window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || 
-    window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+    const reduce = window.matchMedia(`(prefers-reduced-motion: reduce)`);
+    return reduce === true || reduce.matches === true;
 }
-
-//pause/start button
-const button = document.querySelector("header button");
 
 
 /* CANVAS ANIMATION ************************/
+
+//pause/start button
+const headerPauseButton = document.querySelector("header button");
+
 if (!prefersReducedMotion()) {
 
     //settings
@@ -42,13 +43,13 @@ if (!prefersReducedMotion()) {
     const engine = new ParticleEngine(ctx, {pointEvents: true, useParentForPointEvents: true});
 
     //pause/start button
-    button.addEventListener("click", () => {
-        if (button.textContent.includes("Pause")) {
-            button.textContent = "▶ Play";
+    headerPauseButton.addEventListener("click", () => {
+        if (headerPauseButton.textContent.includes("Pause")) {
+            headerPauseButton.textContent = "▶ Play";
             engine.stop();
         }
         else {
-            button.textContent = "▐▐ Pause";
+            headerPauseButton.textContent = "▐▐ Pause";
             animate();
         }
     });
@@ -58,7 +59,7 @@ if (!prefersReducedMotion()) {
         engine.empty();
         canvas.width = header.offsetWidth;
         canvas.height = header.offsetHeight;
-        if (button.textContent.includes("Pause") && !prefersReducedMotion()) {
+        if (headerPauseButton.textContent.includes("Pause") && !prefersReducedMotion()) {
             const points = Spline.getPointsArray(canvas.width, canvas.height, {radius: 5, marginTop: 10, marginLeft: 0});
             for (let {x, y} of points) {
                 engine.addParticle(new Spline(ctx, simplex, {x, y, color: fgcolor, pointEventDistance: 50, pointEventMultiplier: 1, pointEventRecoverSpeed: 0.1}));
@@ -73,12 +74,25 @@ if (!prefersReducedMotion()) {
 const fig = document.querySelector("#feedback #quote");
 const q = fig.querySelector("q");
 const address = fig.querySelector("address");
+const feedbackPauseButton = document.querySelector("#feedback button");
 const delayInMS = 10000;
 
 feedback.sort(() => Math.random() - 0.5);
 
+//pause/start button
+feedbackPauseButton.addEventListener("click", () => {
+    if (feedbackPauseButton.textContent.includes("Pause")) {
+        feedbackPauseButton.textContent = "▶ Play";
+    }
+    else {
+        feedbackPauseButton.textContent = "▐▐ Pause";
+        changeQuote();
+    }
+});
+
 function changeQuote(immediate = false) {
-    if (immediate || (button.textContent.includes("Pause") && !prefersReducedMotion())) {
+    if (immediate || (feedbackPauseButton.textContent.includes("Pause") 
+                      && !prefersReducedMotion())) {
         const newQuote = feedback.shift();
         feedback.push(newQuote);
         if (!immediate) {
@@ -87,6 +101,7 @@ function changeQuote(immediate = false) {
         q.textContent = newQuote.text;
         address.textContent = `—${newQuote.byline}`;
         if (!immediate) {
+            // NOTE: use ViewTransition API when it has better support
             let interval = setInterval(() => {
                 const opacity = Number(fig.style.opacity) + 0.05;
                 fig.style.opacity = Math.min(opacity, 1);
@@ -94,7 +109,10 @@ function changeQuote(immediate = false) {
             }, 10);
         }
     }
-    fig.classList.contains("use-slider") && setTimeout(changeQuote, delayInMS);
+    if (fig.classList.contains("use-slider") && 
+        feedbackPauseButton.textContent.includes("Pause")) {
+            setTimeout(changeQuote, delayInMS);
+    }
 }
 
 changeQuote(true);

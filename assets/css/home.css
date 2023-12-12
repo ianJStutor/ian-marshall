@@ -30,26 +30,6 @@ header {
         box-shadow: 0 0 10px black;
         max-width: none;
     }
-    & menu {
-        list-style-type: none;
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        display: flex;
-        margin: 0;
-        padding: 0;
-    }
-    & button {
-        background: none;
-        color: var(--grey);
-        font-size: 0.7em;
-        cursor: pointer;
-        border: none;
-    
-        &:hover {
-            color: var(--highlight-light);
-        }
-    }
 }
 
 nav {
@@ -79,6 +59,28 @@ nav {
 
         &:hover img {
             filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(-145deg) brightness(65%) contrast(80%);
+        }
+    }
+}
+
+menu {
+    list-style-type: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+    & button {
+        background: none;
+        color: var(--grey);
+        font-size: 0.7em;
+        cursor: pointer;
+        border: none;
+    
+        &:hover {
+            color: var(--highlight-light);
         }
     }
 }
@@ -135,6 +137,7 @@ figure:has(img) {
     }
     & img {
         object-fit: contain;
+        margin-inline-end: 1em;
     }
     & div div {
         max-width: calc(100% - 220px);
@@ -170,12 +173,12 @@ figure:has(img) {
     margin: 30px auto 0;
     padding: 0.5em;
     box-sizing: border-box;
+    position: relative;
 
     & > h2 + * {
         background: linear-gradient(var(--shadow), var(--off-black), transparent);
     }
-    & figure:first-of-type,
-    & figure:first-of-type img {
+    & :is(figure:first-of-type, figure:first-of-type img) {
         width: 200px;
     }
     & figure#quote {
