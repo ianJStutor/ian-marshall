@@ -76,6 +76,7 @@ const q = fig.querySelector("q");
 const address = fig.querySelector("address");
 const feedbackPauseButton = document.querySelector("#feedback button");
 const delayInMS = 10000;
+var timeout;
 
 feedback.sort(() => Math.random() - 0.5);
 
@@ -83,6 +84,7 @@ feedback.sort(() => Math.random() - 0.5);
 feedbackPauseButton.addEventListener("click", () => {
     if (feedbackPauseButton.textContent.includes("Pause")) {
         feedbackPauseButton.textContent = "▶ Play";
+        if (timeout) clearTimeout(timeout);
     }
     else {
         feedbackPauseButton.textContent = "▐▐ Pause";
@@ -111,7 +113,8 @@ function changeQuote(immediate = false) {
     }
     if (fig.classList.contains("use-slider") && 
         feedbackPauseButton.textContent.includes("Pause")) {
-            setTimeout(changeQuote, delayInMS);
+            if (timeout) clearTimeout(timeout);
+            timeout = setTimeout(changeQuote, delayInMS);
     }
 }
 
