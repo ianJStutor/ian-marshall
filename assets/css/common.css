@@ -64,13 +64,12 @@ h3 {
     font-size: 1.5em;
     line-height: 1.25em;
     margin: 0.25em;
-
-    & small {
-        display: block;
-        font-size: 0.6em;
-    }
 }
-p, q {
+h3 small {
+    display: block;
+    font-size: 0.6em;
+}
+p, q, ul, ol {
     max-width: min(60ch, 90%);
     display: table;
     margin: 0 auto 1em;
@@ -80,13 +79,12 @@ a {
     color: black;
     text-decoration: none;
     font-weight: bold;
-
-    &:hover {
-        color: var(--highlight);
-    }
-    &:hover h1 {
-        filter: invert(1);
-    }
+}
+a:hover {
+    color: var(--highlight);
+}
+a:hover h1 {
+    filter: invert(1);
 }
 
 ul {

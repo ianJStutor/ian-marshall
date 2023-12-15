@@ -3,33 +3,32 @@ header {
     display: grid;
     place-content: center;
     position: relative;
-
-    & canvas {
-        background: var(--off-black);
-        position: absolute;
-        z-index: -1;
-    }
-    & hgroup {
-        margin: 40px auto 100px;
-        cursor: default;
-        text-align: center;
-    }
-    & h1 {
-        display: table;
-        margin: 0 auto 0.1em;
-        background: #00000099;
-        box-shadow: 0 0 10px black;
-    }
-    & p {
-        display: inline-block;
-        margin: 1em auto;
-        font-size: 2em;
-        line-height: 1em;
-        font-weight: bold;
-        background: #00000099;
-        box-shadow: 0 0 10px black;
-        max-width: none;
-    }
+}
+header canvas {
+    background: var(--off-black);
+    position: absolute;
+    z-index: -1;
+}
+header hgroup {
+    margin: 40px auto 100px;
+    cursor: default;
+    text-align: center;
+}
+header h1 {
+    display: table;
+    margin: 0 auto 0.1em;
+    background: #00000099;
+    box-shadow: 0 0 10px black;
+}
+header p {
+    display: inline-block;
+    margin: 1em auto;
+    font-size: 2em;
+    line-height: 1em;
+    font-weight: bold;
+    background: #00000099;
+    box-shadow: 0 0 10px black;
+    max-width: none;
 }
 
 nav {
@@ -42,30 +41,26 @@ nav {
     z-index: 100;
     isolation: isolate;
     padding: 3px 0;
-    
-    &::before {
-        content: "";
-        display: block;
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(white, var(--highlight-light) 5px, var(--highlight-light) calc(100% - 10px), var(--highlight));
-        transform: perspective( 1000px ) rotateX( 30deg );
-        border-bottom: 2px solid black;
-        box-shadow: 0 2px 5px black;
-        z-index: -1;
-    }
-
-    & a {
-        padding: 0.5em;
-
-        &:hover img {
-            filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(-145deg) brightness(65%) contrast(80%);
-        }
-    }
-
-    & button {
-        display: none;
-    }
+}
+nav::before {
+    content: "";
+    display: block;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(white, var(--highlight-light) 5px, var(--highlight-light) calc(100% - 10px), var(--highlight));
+    transform: perspective( 1000px ) rotateX( 30deg );
+    border-bottom: 2px solid black;
+    box-shadow: 0 2px 5px black;
+    z-index: -1;
+}
+nav a {
+    padding: 0.5em;
+}
+nav a:hover img {
+    filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(-145deg) brightness(65%) contrast(80%);
+}
+nav button {
+    display: none;
 }
 
 @media screen and (max-width: 999px) {
@@ -76,21 +71,20 @@ nav {
         position: fixed;
         transform: translateY(calc(6em - 100%));
         transition: transform 0.25s;
-        
-        & button {
-            display: block;
-            font-size: 2em;
-            transform: rotate(90deg);
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 5px 15px;
-        }
+    }
+    nav button {
+        display: block;
+        font-size: 2em;
+        transform: rotate(90deg);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 5px 15px;
     }
     nav::before {
         transform: none;
     }
-    nav:has(button:focus) {
+    nav:has(button:focus, a:active) {
         transform: translateY(0);
     }
 }
@@ -103,33 +97,31 @@ menu {
     display: flex;
     margin: 0;
     padding: 0;
-
-    & button {
-        background: none;
-        color: var(--grey);
-        font-size: 0.7em;
-        cursor: pointer;
-        border: none;
-    
-        &:hover {
-            color: var(--highlight-light);
-        }
-    }
+}
+menu button {
+    background: none;
+    color: var(--grey);
+    font-size: 0.7em;
+    cursor: pointer;
+    border: none;
+}
+menu button:hover {
+    color: var(--highlight-light);
 }
 
 main > section > :is(a, div) {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 1em;
     align-items: stretch;
     margin-top: 2em;
-
-    & > * {
-        margin-bottom: 1em;
-    }
+}
+main > section > :is(a, div) > * {
+    margin-bottom: 1em;
 }
 
-figure:has(img) {
+figure.card {
     display: flex;
     flex-direction: column-reverse;
     justify-content: space-between;
@@ -142,27 +134,26 @@ figure:has(img) {
     box-sizing: border-box;
     width: 300px;
     height: 100%;
-
-    & img {
-        display: block;
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        border-bottom: 3px double black;
-        border-top: 3px double black;
-        margin-bottom: 8px;
-        transition: 0.25s;
-    }
-    & figcaption {
-        box-sizing: border-box;
-        padding: 0.5em;
-        margin: 0 0 0.5em;
-        font-size: 0.75em;
-        line-height: 1.05em;
-        text-wrap: balance;
-    }
+}
+figure.card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-bottom: 3px double black;
+    border-top: 3px double black;
+    margin-bottom: 8px;
+    transition: 0.25s;
+}
+figure.card figcaption {
+    box-sizing: border-box;
+    padding: 0.5em;
+    margin: 0 0 0.5em;
+    font-size: 0.75em;
+    line-height: 1.05em;
+    text-wrap: balance;
 }
 @media screen and (prefers-reduced-motion: no-preference) {
-    a:hover figure img {
+    a:hover figure.card img {
         transform: scale(0.95);
     }
 }
@@ -170,40 +161,38 @@ figure:has(img) {
 #about {
     width: 70%;
     margin: 30px auto 0;
-
-    & > div {
-        align-items: flex-end;
-    }
-    & img {
-        object-fit: contain;
-        margin-inline-end: 1em;
-    }
-    & div div {
-        max-width: calc(100% - 220px);
-    }
-    & h2 {
-        margin-top: 0;
-    }
-    & ul {
-        font-size: min(1.25em, 4.5vw);
-        line-height: 1.5em;
-        color: var(--light);
-    }
-    & ul li::marker {
-        content: "◦ ";
-    }
+}
+#about > div {
+    align-items: flex-end;
+}
+#about img {
+    object-fit: contain;
+    margin-inline-end: 1em;
+}
+#about div div {
+    max-width: calc(100% - 250px);
+}
+#about h2 {
+    margin-top: 0;
+}
+#about ul {
+    font-size: min(1.25em, 4.5vw);
+    line-height: 1.5em;
+    color: var(--light);
+}
+#about ul li::marker {
+    content: "◦ ";
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 900px) {
     #about > div {
         display: block;
         text-align: center;
-
-        & div {
-            text-align: left;
-            max-width: 90%;
-            margin: auto;
-        }
+    }
+    #about > div div {
+        text-align: left;
+        max-width: 90%;
+        margin: auto;
     }
 }
 
@@ -213,35 +202,32 @@ figure:has(img) {
     padding: 0.5em;
     box-sizing: border-box;
     position: relative;
-
-    & > h2 + * {
-        background: linear-gradient(var(--shadow), var(--off-black), transparent);
-    }
-    & :is(figure:first-of-type, figure:first-of-type img) {
-        width: 200px;
-    }
-    & figure {
-        flex-direction: column;
-    }
-    & figure#quote {
-        width: max(250px, calc(85% - 200px));
-        font-size: min(1.3em, 4vw);
-        line-height: 1.5em;
-        margin: 0 0.5em;
-        color: white;
-        display: flex;
-        
-        justify-content: center;
-        gap: 1em;
-        
-        &.use-slider {
-            height: 14em;
-        }
-    }
+}
+#feedback > h2 + * {
+    background: linear-gradient(var(--shadow), var(--off-black), transparent);
+}
+#feedback :is(figure:first-of-type, figure:first-of-type img) {
+    width: 200px;
+}
+#feedback figure {
+    flex-direction: column;
+}
+#feedback figure#quote {
+    width: max(250px, calc(85% - 200px));
+    font-size: min(1.3em, 4vw);
+    line-height: 1.5em;
+    margin: 0 0.5em;
+    color: white;
+    display: flex;
     
-    & address {
-        font-size: 0.8em;
-    }
+    justify-content: center;
+    gap: 1em;
+}
+#feedback figure#quote.use-slider {
+    height: 14em;
+}
+#feedback address {
+    font-size: 0.8em;
 }
 
 #resume figure img {
