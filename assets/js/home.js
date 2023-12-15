@@ -8,6 +8,18 @@ function prefersReducedMotion() {
 }
 
 
+/* HAMBURGER MENU ************************/
+//Note: when CSS :has() is better supported, no JavaScript will be necessary here
+const nav = document.querySelector("nav");
+const navButton = nav.querySelector("button");
+navButton.addEventListener("focus", () => {
+    nav.classList.add("open");
+});
+navButton.addEventListener("blur", () => {
+    nav.classList.remove("open");
+});
+
+
 /* CANVAS ANIMATION ************************/
 
 //pause/start button
