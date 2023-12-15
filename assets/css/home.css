@@ -48,7 +48,7 @@ nav {
         display: block;
         position: absolute;
         inset: 0;
-        background: linear-gradient(var(--highlight-light) calc(100% - 10px), var(--highlight));
+        background: linear-gradient(white, var(--highlight-light) 5px, var(--highlight-light) calc(100% - 10px), var(--highlight));
         transform: perspective( 1000px ) rotateX( 30deg );
         border-bottom: 2px solid black;
         box-shadow: 0 2px 5px black;
